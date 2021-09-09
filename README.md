@@ -1,3 +1,5 @@
-# LegoWithGocron
+# LegoBot
 
-lego每天执行一次
+fork from https://github.com/go-acme/lego
+
+set env EVERY_X_DAYS=x, legobot can run every x days
