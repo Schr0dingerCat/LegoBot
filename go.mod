@@ -1,4 +1,4 @@
-module gitea.1piecehub.tk/LegoWithGocron
+module gitea.1piecehub.tk/LegoBot
 
 go 1.17
 
