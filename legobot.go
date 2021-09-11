@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 	"os"
@@ -22,10 +23,11 @@ const (
 )
 
 var (
-	version    = "dev"
-	app        = cli.NewApp()
-	everyXDays = 1
-	atTime     = "01:02:03"
+	version        = "dev"
+	app            = cli.NewApp()
+	everyXDays     = 1
+	atTime         = "01:02:03"
+	ErrTimeFormat1 = errors.New("time format error")
 )
 
 func init() {
@@ -88,7 +90,7 @@ func CanFormatTime(t string) (err error) {
 	var hour, min, sec int
 	ts := strings.Split(t, ":")
 	if len(ts) < 2 || len(ts) > 3 {
-		return err
+		return ErrTimeFormat1
 	}
 
 	if hour, err = strconv.Atoi(ts[0]); err != nil {
@@ -104,7 +106,7 @@ func CanFormatTime(t string) (err error) {
 	}
 
 	if hour < 0 || hour > 23 || min < 0 || min > 59 || sec < 0 || sec > 59 {
-		return err
+		return ErrTimeFormat1
 	}
 
 	return nil
@@ -116,7 +118,7 @@ func GetRandomTime() string {
 	h = rand.Intn(24)
 	m = rand.Intn(60)
 	s = rand.Intn(60)
-	return strconv.Itoa(h) + ":" + strconv.Itoa(m) + ":" + strconv.Itoa(s)
+	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }
 
 func main() {
