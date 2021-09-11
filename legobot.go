@@ -66,7 +66,7 @@ func init() {
 		}
 	}
 	atTime = os.Getenv(envAtTime)
-	if e == "" {
+	if atTime == "" {
 		atTime = GetRandomTime()
 		log.Println("not set env:", envAtTime, ". use a random time:", atTime)
 	} else {
